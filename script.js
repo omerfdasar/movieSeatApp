@@ -18,7 +18,6 @@ let currentMovieIndex = localStorage.getItem("selectedMovieIndex")
   : movieSelectBox.selectedIndex;
 //   ---------Events
 window.onload = (e) => {
-  //
   displaySeats();
   updateMovieInfo();
 };
@@ -26,7 +25,6 @@ window.onload = (e) => {
 movieSelectBox.addEventListener("change", (e) => {
   let ticketPrice = e.target.value;
   let movieIndex = e.target.selectedIndex;
-  console.log(movieIndex);
   updateMovieInfo();
   setMovieDataToLocalStorage(ticketPrice, movieIndex);
 });
@@ -42,7 +40,6 @@ container.addEventListener("click", (e) => {
     !e.target.classList.contains("occupied")
   ) {
     e.target.classList.toggle("selected");
-    console.log(e.target);
   }
   /* if (
     e.target.classList.contains("seat") &&
@@ -52,6 +49,7 @@ container.addEventListener("click", (e) => {
   } */
   updateMovieInfo();
 });
+
 const updateMovieInfo = () => {
   let selectedSeats = document.querySelectorAll(".row .seat.selected");
   let selectedSeatsIndexArray = [...selectedSeats].map((seat) =>
