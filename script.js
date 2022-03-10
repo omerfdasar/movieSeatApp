@@ -7,6 +7,7 @@ const count = document.getElementById("count");
 const film = document.getElementById("film");
 const total = document.getElementById("total");
 const movieSelectBox = document.getElementById("movie");
+
 // if there is no value in localStorage for ticket price
 let currentTicketPrice = localStorage.getItem("selectedMoviePrice")
   ? localStorage.getItem("selectedMoviePrice")
@@ -17,7 +18,8 @@ let currentMovieIndex = localStorage.getItem("selectedMovieIndex")
   : movieSelectBox.selectedIndex;
 //   ---------Events
 window.onload = (e) => {
-  movieSelectBox.selectedIndex = currentMovieIndex;
+  //
+  displaySeats();
   updateMovieInfo();
 };
 
@@ -65,4 +67,20 @@ const updateMovieInfo = () => {
     movieSelectBox.options[movieSelectBox.selectedIndex].innerText.split(
       "("
     )[0];
+};
+const displaySeats = () => {
+  movieSelectBox.selectedIndex = currentMovieIndex;
+  let selectedSeatsFromStorage = JSON.parse(
+    localStorage.getItem("selectedSeats")
+  );
+  if (
+    selectedSeatsFromStorage !== null &&
+    selectedSeatsFromStorage.length > 0
+  ) {
+    allSeats.forEach((seat, index) => {
+      if (selectedSeatsFromStorage.indexOf(index) > -1) {
+        seat.classList.add("selected");
+      }
+    });
+  }
 };
