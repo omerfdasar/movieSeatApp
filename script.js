@@ -16,10 +16,16 @@ let currentMovieIndex = localStorage.getItem("selectedMovieIndex")
   ? localStorage.getItem("selectedMovieIndex")
   : movieSelectBox.selectedIndex;
 //   ---------Events
+window.onload = (e) => {
+  movieSelectBox.selectedIndex = currentMovieIndex;
+  updateMovieInfo();
+};
+
 movieSelectBox.addEventListener("change", (e) => {
   let ticketPrice = e.target.value;
   let movieIndex = e.target.selectedIndex;
   console.log(movieIndex);
+  updateMovieInfo();
   setMovieDataToLocalStorage(ticketPrice, movieIndex);
 });
 
@@ -53,4 +59,10 @@ const updateMovieInfo = () => {
     "selectedSeats",
     JSON.stringify(selectedSeatsIndexArray)
   );
+  count.innerText = selectedSeatsIndexArray.length;
+  total.innerText = selectedSeatsIndexArray.length * movieSelectBox.value;
+  film.innerText =
+    movieSelectBox.options[movieSelectBox.selectedIndex].innerText.split(
+      "("
+    )[0];
 };
