@@ -42,5 +42,15 @@ container.addEventListener("click", (e) => {
   ) {
     alert("Please do not choose reserved seats");
   } */
-  updateMovieInfo(ticketPrice);
+  updateMovieInfo();
 });
+const updateMovieInfo = () => {
+  let selectedSeats = document.querySelectorAll(".row .seat.selected");
+  let selectedSeatsIndexArray = [...selectedSeats].map((seat) =>
+    [...allSeats].indexOf(seat)
+  );
+  localStorage.setItem(
+    "selectedSeats",
+    JSON.stringify(selectedSeatsIndexArray)
+  );
+};
